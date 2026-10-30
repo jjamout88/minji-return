@@ -30,6 +30,7 @@ canvas{position:fixed;inset:0;pointer-events:none;z-index:9}
 <h1>나 강민지는 삼일을 떠나<br>다시 <span class="g">안진</span>으로 올 것입니다<span class="dot">.</span></h1>
 <p class="sub">Deloitte<span class="g">.</span> 초록점 하나 더 추가 <span class="g">● ● ●</span></p>
 <button id="b">확인<span style="color:#fff">.</span></button>
+<button id="no" style="font-size:clamp(18px,4vw,32px);padding:16px 40px;background:#333;color:#aaa;box-shadow:none;animation:none;position:relative;transition:left .15s,top .15s">거절합니다</button>
 <div id="msg"></div>
 <div class="vals">
 <div><b class="g">●</b> <b>Lead the way</b><br>안진으로 가는 길을 앞장섬</div>
@@ -50,4 +51,6 @@ const C=['#86BC25','#43B02A','#26890D','#C4D600','#ffffff','#0097A9'];
 function boom(cx,cy){for(let i=0;i<200;i++){const a=Math.random()*6.28,s=Math.random()*13+3;P.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:110,c:C[i%C.length],r:Math.random()*5+2})}}
 function loop(){x.clearRect(0,0,c.width,c.height);P=P.filter(p=>p.l>0);for(const p of P){p.x+=p.vx;p.y+=p.vy;p.vy+=0.15;p.vx*=0.98;p.l--;x.globalAlpha=p.l/110;x.fillStyle=p.c;x.beginPath();x.arc(p.x,p.y,p.r,0,6.28);x.fill()}x.globalAlpha=1;requestAnimationFrame(loop)}loop();
 document.getElementById('b').onclick=()=>{document.getElementById('msg').innerHTML='WELCOME BACK TO DELOITTE<span style="color:#fff">.</span> 💚';for(let i=0;i<16;i++)setTimeout(()=>boom(Math.random()*c.width,Math.random()*c.height*0.7),i*160)};
+const n=document.getElementById('no');function run(e){e&&e.preventDefault();n.style.position='fixed';n.style.zIndex=20;n.style.left=Math.random()*(innerWidth-n.offsetWidth)+'px';n.style.top=Math.random()*(innerHeight-n.offsetHeight)+'px';}
+n.addEventListener('mouseenter',run);n.addEventListener('touchstart',run,{passive:false});n.addEventListener('click',run);
 </script></body></html>
