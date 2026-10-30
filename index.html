@@ -1,0 +1,18 @@
+<!DOCTYPE html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>강민지의 선언</title>
+<style>
+body{margin:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#ffecd2,#fcb69f);font-family:sans-serif;overflow:hidden}
+h1{font-size:clamp(28px,6vw,64px);text-align:center;padding:0 20px;color:#333;line-height:1.4}
+button{margin-top:40px;font-size:clamp(32px,7vw,72px);padding:30px 90px;border:none;border-radius:30px;background:#ff3d6e;color:#fff;font-weight:bold;box-shadow:0 12px 0 #b8193f;cursor:pointer}
+button:active{transform:translateY(8px);box-shadow:0 4px 0 #b8193f}
+canvas{position:fixed;inset:0;pointer-events:none}
+</style></head><body>
+<h1>나 강민지는 삼일을 떠나<br>다시 안진으로 올 것입니다</h1>
+<button id="b">확인</button><canvas id="c"></canvas>
+<script>
+const c=document.getElementById('c'),x=c.getContext('2d');let P=[];
+function rs(){c.width=innerWidth;c.height=innerHeight}rs();onresize=rs;
+function boom(cx,cy){const h=Math.random()*360;for(let i=0;i<180;i++){const a=Math.random()*6.28,s=Math.random()*12+3;P.push({x:cx,y:cy,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:100,c:`hsl(${h+Math.random()*60},100%,60%)`,r:Math.random()*4+2})}}
+function loop(){x.clearRect(0,0,c.width,c.height);P=P.filter(p=>p.l>0);for(const p of P){p.x+=p.vx;p.y+=p.vy;p.vy+=0.15;p.vx*=0.98;p.l--;x.globalAlpha=p.l/100;x.fillStyle=p.c;x.beginPath();x.arc(p.x,p.y,p.r,0,6.28);x.fill()}x.globalAlpha=1;requestAnimationFrame(loop)}loop();
+document.getElementById('b').onclick=()=>{for(let i=0;i<12;i++)setTimeout(()=>boom(Math.random()*c.width,Math.random()*c.height*0.7),i*180)};
+</script></body></html>
